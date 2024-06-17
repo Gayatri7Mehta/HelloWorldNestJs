@@ -37,5 +37,6 @@ jobs:
             cd HelloWorldNestJs
             git pull origin main
             npm install
+            fuser -k 3000/tcp
             npm run start:dev
           EOF
