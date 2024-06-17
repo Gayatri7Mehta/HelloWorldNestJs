@@ -33,7 +33,7 @@ jobs:
           echo "$KEY" > key.pem
           chmod 400 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST << 'EOF'
-            cd /path/to/your/project
+            cd HelloWorldNestJs
             git pull origin main
             npm install
             npm run build
