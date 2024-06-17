@@ -34,8 +34,6 @@ jobs:
           chmod 400 key.pem
           ssh -o StrictHostKeyChecking=no -o ConnectTimeout=600 -i key.pem $USER@$HOST << 'EOF'
             cd HelloWorldNestJs
-            git pull origin main
             npm install
-            fuser -k 3000/tcp
             pm2 restart app
           EOF
