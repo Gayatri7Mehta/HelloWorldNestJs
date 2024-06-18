@@ -25,17 +25,13 @@ jobs:
         run: npm run build
 
       - name: Deploy to EC2
-        uses:appleboy/ssh-action@master
-        env:
-          HOST: ${{ secrets.EC2_HOST }}
-          USER: ${{ secrets.EC2_USER }}
-          KEY: ${{ secrets.EC2_KEY }}
-        run: |
-          echo "$KEY" > key.pem
-          chmod 400 key.pem
-          ssh -o StrictHostKeyChecking=no -o ConnectTimeout=600 -i key.pem $USER@$HOST << 'EOF'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
             cd HelloWorldNestJs
             git pull
             npm install
             pm2 restart app
-          EOF
