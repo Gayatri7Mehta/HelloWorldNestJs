@@ -13,6 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '19' 
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -20,8 +31,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd ~/HelloWorldNestJs
+            cd HelloWorldNestJs
             git pull origin main
             npm install
             npm run build
-            pm2 restart app
+            pm2 restart HelloWorldNestJs
