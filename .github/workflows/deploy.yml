@@ -25,6 +25,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to EC2
+        uses:appleboy/ssh-action@master
         env:
           HOST: ${{ secrets.EC2_HOST }}
           USER: ${{ secrets.EC2_USER }}
